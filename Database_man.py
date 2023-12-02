@@ -6,15 +6,6 @@ def logged_in(username, password):
         nodes = d["nodes"]
         node = {"username": username, "password": password}
 
-        '''for node in nodes:
-            if node['username'] == username:
-                if node['password'] == password:
-                    return True
-                else:
-                    return False
-                
-            else:
-                return False'''
         if node in nodes:
             return True
         else:
@@ -49,10 +40,3 @@ def register(username, password):
         return True
 
 
-    
-
-
-
-
-
-print(logged_in("uday", "bringmethanos"))

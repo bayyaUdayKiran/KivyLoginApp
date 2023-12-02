@@ -1,16 +1,5 @@
 import json
 
-def logged_in(username, password):
-    with open('.database.json', 'rb') as f:
-        d = json.load(f)
-        nodes = d["nodes"]
-        node = {"username": username, "password": password}
-
-        if node in nodes:
-            return True
-        else:
-            return False
-            
 def node_exists(nw_node, json_data):
     if nw_node in json_data['nodes']:
         return True
@@ -18,6 +7,16 @@ def node_exists(nw_node, json_data):
     else:
         return False
 
+def logged_in(username, password):
+    with open('.database.json', 'r') as f:
+        d = json.load(f)
+        node = {"username": username, "password": password}
+
+        if node_exists(node, d):
+            return True
+        
+        else:
+            return False
 
 def register(username, password):
     new_node = {
@@ -25,8 +24,8 @@ def register(username, password):
         "password": password
     }
 
-    with open('.database.json', 'rb') as f:
-        json_data = json.load(f)
+    with open('.database.json', 'r') as fr:
+        json_data = json.load(fr)
 
     if node_exists(new_node, json_data):
         return False
@@ -34,9 +33,7 @@ def register(username, password):
     else:
         json_data["nodes"].append(new_node)
 
-        with open('.database.json', 'wb') as f:
-            json.dump(json_data, f, indent=4)
+        with open('.database.json', 'w') as fw:
+            json.dump(json_data, fw, indent=4)
         
         return True
-
-

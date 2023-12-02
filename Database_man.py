@@ -37,3 +37,5 @@ def register(username, password):
             json.dump(json_data, fw, indent=4)
         
         return True
+
+print("Testing master branch protection..!")
